@@ -75,7 +75,7 @@
     methods: {
       addNewElement() {
         this.$emit('addTextField', this.newElementText)
-        this.newElementText = ''
+        this.resetTextboxProperties()
       },
       updateTextbox(property) {
         if (!parseInt(this[property])) return
@@ -83,6 +83,11 @@
           property: property,
           value: parseInt(this[property])
         })
+      },
+      resetTextboxProperties() {
+        this.newElementText = ''
+        this.fontSize = ''
+        this.lineHeight = ''
       }
     }
   }
