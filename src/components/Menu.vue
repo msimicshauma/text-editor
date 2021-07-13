@@ -30,6 +30,7 @@
           id="fontSize"
           name="fontSize"
           placeholder="Font size (px)"
+          @input="updateTextbox('fontSize')"
         >
       </div>
       <div class="small-input">
@@ -40,6 +41,7 @@
           id="lineHeight"
           name="lineHeight"
           placeholder="Line height (px)"
+          @input="updateTextbox('lineHeight')"
         >
       </div>
     </div>
@@ -65,8 +67,8 @@
     data() {
       return {
         newElementText: '',
-        fontSize: 12,
-        lineHeight: 1.5,
+        fontSize: '',
+        lineHeight: '',
         fontFamily: 'roboto'
       }
     },
@@ -74,6 +76,13 @@
       addNewElement() {
         this.$emit('addTextField', this.newElementText)
         this.newElementText = ''
+      },
+      updateTextbox(property) {
+        if (!parseInt(this[property])) return
+        this.$emit('updateTextboxConfig', {
+          property: property,
+          value: parseInt(this[property])
+        })
       }
     }
   }

@@ -5,14 +5,19 @@
     </div>
     <div class="main">
       <div class="canvas-wrapper">
-        <div class="container">
+        <div
+          class="container"
+          @click="setMenuParams"
+        >
           <canvas
             id="canvas"
           ></canvas>
         </div>
       </div>
       <Menu
+        ref="menu"
         @addTextField="addTextField"
+        @updateTextboxConfig="updateTextboxProperty"
       />
     </div>
   </div>
@@ -34,7 +39,7 @@
     },
     methods: {
       addTextField(newText) {
-        const textField = new fabric.IText(newText, {
+        const textbox = new fabric.IText(newText, {
           cornerStyle: 'circle',
           transparentCorners: false,
           cornerColor: '#fff',
@@ -43,7 +48,21 @@
           borderColor: '#bababa',
           borderScaleFactor: 1.3
         })
-        this.fabricCanvas.add(textField)
+        this.fabricCanvas.add(textbox)
+      },
+      updateTextboxProperty(config) {
+        const selectedTextbox = this.fabricCanvas.getActiveObject()
+        if (selectedTextbox) {
+          selectedTextbox.set(config.property, config.value)
+          this.fabricCanvas.renderAll()
+        }
+      },
+      setMenuParams() {
+        const selectedTextbox = this.fabricCanvas.getActiveObject()
+        if (selectedTextbox) {
+          this.$refs.menu.fontSize = selectedTextbox.fontSize
+          this.$refs.menu.lineHeight = selectedTextbox.lineHeight
+        }
       }
     },
     mounted() {
