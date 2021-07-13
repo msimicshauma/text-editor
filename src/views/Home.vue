@@ -5,20 +5,51 @@
     </div>
     <div class="main">
       <div class="canvas-wrapper">
-        Canvas
+        <div class="container">
+          <canvas
+            id="canvas"
+          ></canvas>
+        </div>
       </div>
-      <Menu />
+      <Menu
+        @addTextField="addTextField"
+      />
     </div>
   </div>
 </template>
 
 <script>
   import Menu from "../components/Menu"
+  import { fabric } from 'fabric'
 
   export default {
     name: 'Home',
     components: {
       Menu
+    },
+    data() {
+      return {
+        fabricCanvas: null
+      }
+    },
+    methods: {
+      addTextField(newText) {
+        const textField = new fabric.IText(newText, {
+          cornerStyle: 'circle',
+          transparentCorners: false,
+          cornerColor: '#fff',
+          cornerStrokeColor: '#bababa',
+          cornerSize: 10,
+          borderColor: '#bababa',
+          borderScaleFactor: 1.3
+        })
+        this.fabricCanvas.add(textField)
+      }
+    },
+    mounted() {
+      this.fabricCanvas = new fabric.Canvas('canvas')
+      this.fabricCanvas.setHeight(500)
+      this.fabricCanvas.setWidth(500)
     }
   }
 </script>
@@ -55,5 +86,13 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+  }
+
+  /* Canvas container */
+  .container {
+    background-color: #fff;
+    border: 2px solid #cfcfcf;
+    width: 500px;
+    height: 500px;
   }
 </style>

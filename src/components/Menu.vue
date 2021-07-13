@@ -11,9 +11,13 @@
           id="elementText"
           name="elementText"
           placeholder="Text for new element"
+          @keyup.enter="addNewElement"
         >
       </div>
-      <div class="plus-button">
+      <div
+        class="plus-button"
+        @click="addNewElement"
+      >
         +
       </div>
     </div>
@@ -64,6 +68,12 @@
         fontSize: 12,
         lineHeight: 1.5,
         fontFamily: 'roboto'
+      }
+    },
+    methods: {
+      addNewElement() {
+        this.$emit('addTextField', this.newElementText)
+        this.newElementText = ''
       }
     }
   }
