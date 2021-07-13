@@ -24,6 +24,7 @@
 </script>
 
 <style scoped>
+  /* App wrapper and header */
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -39,11 +40,15 @@
     font-weight: bold;
     word-spacing: 11px;
   }
+
+  /* Main content section that wraps canvas and menu */
   .main {
     display: flex;
     justify-content: flex-end;
     height: 100%;
   }
+
+  /* Canvas wrapper */
   .canvas-wrapper {
     background-color: #e1e1e1;
     display: flex;

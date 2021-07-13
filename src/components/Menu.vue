@@ -45,11 +45,11 @@
         v-model="fontFamily"
         id="fontFamily"
       >
-        <option value="roboto">Roboto</option>
+        <option value="roboto" selected>Roboto</option>
       </select>
       <img
-        src="/src/assets/icons/caret-down.svg"
-        class="caret-down"
+        src="@/assets/icons/chevron-down.svg"
+        class="chevron-down"
       >
     </div>
   </div>
@@ -63,7 +63,7 @@
         newElementText: '',
         fontSize: 12,
         lineHeight: 1.5,
-        fontFamily: ''
+        fontFamily: 'roboto'
       }
     }
   }
@@ -84,6 +84,7 @@
     background-color: #fff;
     padding: 25px 20px;
     width: 250px;
+    box-shadow: -9px 0px 7px 0px rgba(0,0,0,0.19);
   }
   .menu-header {
     color: #797979;
@@ -167,9 +168,11 @@
     outline: none;
     margin-top: 5px;
   }
-  .caret-down {
+  .chevron-down {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 4px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
   }
 </style>
