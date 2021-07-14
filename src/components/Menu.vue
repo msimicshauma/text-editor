@@ -50,8 +50,15 @@
       <select
         v-model="fontFamily"
         id="fontFamily"
+        @change="updateFont"
       >
-        <option value="roboto" selected>Roboto</option>
+        <option value="" disabled selected>Select font</option>
+        <option
+          v-for="font in fonts"
+          :value="font"
+        >
+          {{ font }}
+        </option>
       </select>
       <img
         src="@/assets/icons/chevron-down.svg"
@@ -69,7 +76,19 @@
         newElementText: '',
         fontSize: '',
         lineHeight: '',
-        fontFamily: 'roboto'
+        fontFamily: '',
+        fonts: [
+          'Arial',
+          'Arial Black',
+          'Verdana',
+          'Tahoma',
+          'Trebuchet MS',
+          'Impact',
+          'Times New Roman',
+          'Didot',
+          'Georgia',
+          'Monaco'
+        ]
       }
     },
     methods: {
@@ -81,13 +100,20 @@
         if (!parseInt(this[property])) return
         this.$emit('updateTextboxConfig', {
           property: property,
-          value: parseInt(this[property])
+          value: this[property]
+        })
+      },
+      updateFont() {
+        this.$emit('updateTextboxConfig', {
+          property: 'fontFamily',
+          value: this.fontFamily
         })
       },
       resetTextboxProperties() {
         this.newElementText = ''
         this.fontSize = ''
         this.lineHeight = ''
+        this.fontFamily = ''
       }
     }
   }

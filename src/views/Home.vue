@@ -62,6 +62,7 @@
         if (selectedTextbox) {
           this.$refs.menu.fontSize = selectedTextbox.fontSize
           this.$refs.menu.lineHeight = selectedTextbox.lineHeight
+          this.$refs.menu.fontFamily = selectedTextbox.fontFamily
         }
       }
     },
