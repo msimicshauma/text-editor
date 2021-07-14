@@ -93,8 +93,12 @@
     },
     methods: {
       addNewElement() {
-        this.$emit('addTextField', this.newElementText)
-        this.resetTextboxProperties()
+        this.$emit('addTextField', {
+          text: this.newElementText,
+          fontSize: this.fontSize,
+          lineHeight: this.lineHeight,
+          fontFamily: this.fontFamily
+        })
       },
       updateTextbox(property) {
         if (!parseInt(this[property])) return
@@ -108,12 +112,6 @@
           property: 'fontFamily',
           value: this.fontFamily
         })
-      },
-      resetTextboxProperties() {
-        this.newElementText = ''
-        this.fontSize = ''
-        this.lineHeight = ''
-        this.fontFamily = ''
       }
     }
   }

@@ -9,9 +9,7 @@
           class="container"
           @click="setMenuParams"
         >
-          <canvas
-            id="canvas"
-          ></canvas>
+          <canvas id="canvas"></canvas>
         </div>
       </div>
       <Menu
@@ -38,8 +36,8 @@
       }
     },
     methods: {
-      addTextField(newText) {
-        const textbox = new fabric.IText(newText, {
+      addTextField(config) {
+        const textboxConfig = {
           cornerStyle: 'circle',
           transparentCorners: false,
           cornerColor: '#fff',
@@ -47,7 +45,12 @@
           cornerSize: 10,
           borderColor: '#bababa',
           borderScaleFactor: 1.3
-        })
+        }
+        if (parseInt(config.fontSize)) textboxConfig.fontSize = config.fontSize
+        if (parseInt(config.lineHeight)) textboxConfig.lineHeight = config.lineHeight
+        if (config.fontFamily) textboxConfig.fontFamily = config.fontFamily
+
+        const textbox = new fabric.IText(config.text, textboxConfig)
         this.fabricCanvas.add(textbox)
       },
       updateTextboxProperty(config) {
@@ -68,6 +71,14 @@
     },
     mounted() {
       this.fabricCanvas = new fabric.Canvas('canvas')
+      this.fabricCanvas.on('object:scaling', (event) => {
+        event.target.fontSize *= event.target.scaleX
+        event.target.fontSize = event.target.fontSize.toFixed(0)
+        event.target.scaleX = 1
+        event.target.scaleY = 1
+        this.fabricCanvas.renderAll()
+        this.setMenuParams()
+      })
       this.fabricCanvas.setHeight(500)
       this.fabricCanvas.setWidth(500)
     }
